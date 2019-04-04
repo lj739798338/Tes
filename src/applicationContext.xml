@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- bean -->
+<bean id="provVO" class="com.it.bean.ProvVO"></bean>
+	<!-- dao -->
+	<bean id="userInfoDAO" class="com.it.dao.UserInfoDAO" init-method="init" destroy-method="destroy" scope="singleton">
+
+	</bean>
+	<!-- service -->
+	<bean id="userInfoServiceImpl"
+		class="com.it.service.UserInfoServiceImpl">
+		<property name="userInfoDAO" ref="userInfoDAO"></property>
+	</bean>
+	<!-- controller -->
+	<bean id="userInfoController"
+		class="com.it.controller.UserInfoController">
+		<property name="userInfoServiceImpl"
+			ref="userInfoServiceImpl"></property>
+	</bean>
+	
+	<bean id="demoController" class="com.it.controller.DemoController">
+	  <property name="name">
+	     <value>zhang三</value>
+	  </property>
+	  <property name="age">
+	    <value>12</value>
+	  </property>
+	  <property name="provVO" ref="provVO"></property>
+	  
+	  <property name="listS">
+	    <list>
+	      <value>a1</value>
+	      <value>a2</value>
+	      <value>a3</value>
+	      <value>a4</value>
+	      <value>a5</value>
+	    </list>
+	  </property>
+	  
+	  <property name="maps">
+	  
+	   <!-- <map>
+	     <entry key="a">
+	      <value>1</value>
+	     </entry>
+	     <entry key="b">
+	      <value>2</value>
+	     </entry>
+	     
+	   </map> -->
+	   
+	  <!--  <map>
+	        <entry key="an entry" value="just some string"/>
+            <entry key ="a ref" value="myDataSource"/>
+	   </map> -->
+	   
+	   <map>
+	      <entry>
+	         <key>
+	            <value>a</value>
+	         </key>
+	         <value>1</value>
+	      </entry>
+	      <entry>
+	         <key>
+	            <value>b</value>
+	         </key>
+	         <value>2</value>
+	      </entry>
+	   </map>
+	  </property>
+	  
+	  <property name="sets">
+	  
+	     <set>
+	       <value>1</value>
+	        <value>1</value>
+	         <value>abc</value>
+	          <value>ef</value>
+	           <value>4545</value>
+	             <value>ef</value>
+	     </set>
+	  </property>
+	</bean>
+	
+	<bean id="fooController" class="com.it.controller.FooController">
+	   <!-- <constructor-arg index="0" value="1"> </constructor-arg> -->
+	 <!--   <constructor-arg index="0" value="1"> </constructor-arg>
+	   <constructor-arg index="1" value="2"> </constructor-arg> -->
+	  <constructor-arg type="java.lang.Integer" value="1"> </constructor-arg>
+	   <constructor-arg type="java.lang.Integer"  value="2"> </constructor-arg>
+	    <constructor-arg ref="provVO"> </constructor-arg>
+	</bean>
+
+
+  <bean id="clientService" class="com.it.service.ClientService" factory-method="createInstance">
+  
+     
+  
+  </bean>
+</beans>
